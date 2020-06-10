@@ -6,12 +6,12 @@
 
     - name: Create a basic AWS ec2 instance
       ec2:
-        key_name: Towe_Instance_Key_Pair
-        instance_type: t2.micro
-        image: ami-0affd4508a5d2481b
+        key_name: "{{ ec2_key_pair }}"
+        instance_type: "{{ ec2_instance_type }}"
+        image: "{{ ec2_image_id }}"
         wait: yes
-        group: TestSecurityGroup
-        count: 1
-        vpc_subnet_id: subnet-0a70bb2a85c1ff05a
+        group: "{{ ec2_sg }}"
+        count: "{{ ec2_instance_count }}"
+        vpc_subnet_id: "{{ ec2_subnet_id }}"
         assign_public_ip: yes
-        region: us-east-1
+        region: "{{ ec2_region }}"
