@@ -1,0 +1,16 @@
+---
+- name: A simple playbook to create an EC2 instance on AWS 
+  hosts: localhost
+
+  tasks:
+
+    - name: Create a basic AWS ec2 instance
+      ec2:
+        key_name: Towe_Instance_Key_Pair
+        instance_type: t2.micro
+        image: ami-0affd4508a5d2481b
+        wait: yes
+        group: TestSecurityGroup
+        count: 1
+        vpc_subnet_id: subnet-0a70bb2a85c1ff05a
+        assign_public_ip: yes
