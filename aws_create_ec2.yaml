@@ -14,3 +14,4 @@
         count: 1
         vpc_subnet_id: subnet-0a70bb2a85c1ff05a
         assign_public_ip: yes
+        region: us-east-1
