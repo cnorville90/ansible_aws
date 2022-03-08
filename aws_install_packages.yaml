@@ -24,4 +24,5 @@
       loop:
         - httpd
         - mariadb
+        - firewalld
 
