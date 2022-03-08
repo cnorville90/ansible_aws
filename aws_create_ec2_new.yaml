@@ -1,0 +1,19 @@
+---
+- name: A simple playbook to create an EC2 instance on AWS
+  hosts: localhost
+
+  tasks:
+
+    - name: Create a basic AWS ec2 instance
+      ec2_instance:
+        name: "{{ ec2_instance_name }}"
+        key_name: "{{ ec2_key_pair }}"
+        instance_type: "{{ ec2_instance_type }}"
+        image_id: "{{ ec2_image_id }}"
+        network:
+          assign_public_ip: "{{ assign_public_ip }}"
+        wait: true
+        security_group: "{{ ec2_sg }}"
+        count: "{{ ec2_instance_count }}"
+        vpc_subnet_id: "{{ ec2_subnet_id }}"
+        region: "{{ ec2_region }}"

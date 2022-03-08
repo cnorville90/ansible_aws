@@ -1,0 +1,21 @@
+---
+- name: Add some firewall rules
+  hosts: all
+  become: true
+
+  tasks: 
+
+    - name: Make sure firewall is installed and running
+      yum:
+        name: firewalld
+        state: latest
+
+    - name: Enable and start firewalld
+      service: 
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Add firewall rules to firewalld
+      firewalld:
+        
