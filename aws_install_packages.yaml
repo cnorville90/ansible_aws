@@ -15,6 +15,7 @@
           - tmux
           - tree
           - httpd
+          - bash-completion
         state: present
 
     - name: Start services
