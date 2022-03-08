@@ -2,6 +2,7 @@
 - name: Install Packages and start services
   hosts: all
   become: true
+  gather_facts: false
 
   tasks: 
 
