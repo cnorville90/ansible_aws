@@ -1,13 +1,11 @@
 ---
 - name: A simple playbook to create an EC2 instance on AWS
   hosts: localhost
-  collections: 
-    - amazon.aws
 
   tasks:
 
     - name: Create a basic AWS ec2 instance
-      ec2_instance:
+      amazon.aws.ec2_instance:
         name: "{{ ec2_instance_name }}"
         key_name: "{{ ec2_key_pair }}"
         instance_type: "{{ ec2_instance_type }}"
