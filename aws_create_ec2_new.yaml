@@ -1,6 +1,8 @@
 ---
 - name: A simple playbook to create an EC2 instance on AWS
   hosts: localhost
+  vars_files: 
+    - vars.yml
 
   tasks:
 
