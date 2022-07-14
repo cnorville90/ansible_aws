@@ -1,14 +1,20 @@
 ---
 - name: A simple playbook to create an EC2 instance on AWS
   hosts: localhost
-  vars_files: 
-    - vars.yml
 
   tasks:
 
     - name: Show Instance Type
       debug:
         msg: "{{ ec2_instance_type }}"
+
+    - name: Show Instance name
+      debug:
+        msg: "{{ ec2_instance_name }}"
+
+    - name: Show SNOW Record
+      debug:
+        msg: "{{ snow_ticket_num }}"
 
     - name: Create a basic AWS ec2 instance
       amazon.aws.ec2_instance:
@@ -29,6 +35,3 @@
       debug: 
         var: ec2_output
 
-    - name: Show SNOW Record
-      debug:
-        msg: "{{ snow_ticket_number }}"
