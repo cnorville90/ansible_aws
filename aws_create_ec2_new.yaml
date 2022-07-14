@@ -46,5 +46,5 @@
         data:
           # request_state: "Closed Complete"
           description: "{{ ec2_output }}"
-      when: ticket_number != ''
+      when: snow_ticket_num != ''
 
