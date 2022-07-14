@@ -19,3 +19,12 @@
         count: "{{ ec2_instance_count }}"
         vpc_subnet_id: "{{ ec2_subnet_id }}"
         region: "{{ ec2_region }}"
+      register: ec2_output
+
+    - name: Return results
+      debug: 
+        var: ec2_output
+
+    - name: Show SNOW Record
+      debug:
+        msg: "{{ snow_ticket_number }}"
