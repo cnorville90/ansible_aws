@@ -48,7 +48,7 @@
         username: "{{ sn_username }}"
         password: "{{ sn_password }}"
         data:
-          # request_state: "Closed Complete"
-          description: "{{ ec2_output }}"
+          request_state: "Closed Complete"
+          work_notes: "{{ ec2_output }}"
       when: snow_ticket_num != ''
 
