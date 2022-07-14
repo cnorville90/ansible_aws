@@ -8,3 +8,15 @@ ec2_subnet_id: subnet-005cc3a32d9e158f1
 assign_public_ip: yes
 ec2_region: us-east-1
 ec2_instance_name: demo-ec2
+
+short_description: "Kyndryl Demo for my team"
+long_description: "This is a demo Change Request for Kyndryl"
+
+#data variables
+
+sn_severity: 2
+sn_priority: 2
+state: in_progress
+incident_number: INC0010002
+ticket_number: REQ0010013
+

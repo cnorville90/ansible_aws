@@ -1,0 +1,23 @@
+---
+- name: Stub Playbook file for testing AWS and SNOW
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - vars.yml
+    - snow_vars.yml
+
+  tasks: 
+
+    - name: Update a catalog work notes and state in ServiceNow
+      servicenow.servicenow.snow_record:
+        state: present
+        number: "{{ ticket_number }}"
+        table: sc_request
+        instance: "{{ sn_instance }}"
+        username: "{{ sn_username }}"
+        password: "{{ sn_password }}"
+        data:
+          # request_state: "Closed Complete"
+          description: "This is a test"
+      when: ticket_number != ''
