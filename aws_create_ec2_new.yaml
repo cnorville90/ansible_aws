@@ -52,7 +52,7 @@
           os: "Linux Red Hat"
           host_name: "{{ ec2_instance_name }}"
         instance: 
-          host: "{{ sn_instance }}"
+          host: "https://{{ sn_instance }}.service-now.com"
           username: "{{ sn_username }}"
           password: "{{ sn_password }}"
 
