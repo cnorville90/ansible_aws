@@ -42,8 +42,8 @@
     - name: Put the new EC2 instance in the CMDB
       servicenow.itsm.configuration_item:
         state: present
-        name: "{{ ec2_output.instances[0].public_dns_name }}"
-        ip_address: "{{ ec2_output.instances[0].public_ip_address }}"
+        name: "{{ ec2_instance_name }}"
+        #ip_address: "{{ ec2_output.instances[0].public_ip_address }}"
         environment: production
         sys_class_name: cmdb_ci_server
         other:
