@@ -56,27 +56,27 @@
           username: "{{ sn_username }}"
           password: "{{ sn_password }}"
 
-    # - name: Update a catalog work notes and state in ServiceNow
-    #   servicenow.servicenow.snow_record:
-    #     state: present
-    #     number: "{{ snow_ticket_num }}"
-    #     table: sc_request
-    #     instance: "{{ sn_instance }}"
-    #     username: "{{ sn_username }}"
-    #     password: "{{ sn_password }}"
-    #     data:
-    #       request_state: "Closed Complete"
-    #       work_notes: "{{ ec2_output }}"
-    #   when: snow_ticket_num != ''
+    - name: Update a catalog work notes and state in ServiceNow
+      servicenow.servicenow.snow_record:
+        state: present
+        number: "{{ snow_ticket_num }}"
+        table: sc_request
+        instance: "{{ sn_instance }}"
+        username: "{{ sn_username }}"
+        password: "{{ sn_password }}"
+        data:
+          request_state: "Closed Complete"
+          work_notes: "{{ ec2_output }}"
+      when: snow_ticket_num != ''
 
-    # - name: Gather the ec2 info
-    #   ec2_instance_info:
-    #     filters:
-    #       "tag:Name": "{{ ec2_instance_name }}"
-    #   register: ec2_node_info
+    - name: Gather the ec2 info
+      ec2_instance_info:
+        filters:
+          "tag:Name": "{{ ec2_instance_name }}"
+      register: ec2_node_info
 
-    # - name: DUmp it out
-    #   debug: 
-    #     var: ec2_node_info
+    - name: DUmp it out
+      debug: 
+        var: ec2_node_info
 
 
