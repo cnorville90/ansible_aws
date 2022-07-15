@@ -1,0 +1,51 @@
+---
+- name: A simple playbook to create an EC2 instance on AWS
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+    - snow_vars.yml
+
+  tasks:
+
+    - name: Show Instance name
+      debug:
+        msg: "{{ ec2_instance_name }}"
+
+    - name: Show SNOW Record
+      debug:
+        msg: "{{ snow_ticket_num }}"
+
+    - name: Create a basic AWS ec2 instance
+      amazon.aws.ec2_instance:
+        state: absent
+        filters: 
+          "tag:Name": "{{ ec2_instance_name }}"
+      register: ec2_output
+
+    - name: Return results
+      debug: 
+        var: ec2_output
+
+    - name: Put the new EC2 instance in the CMDB
+      servicenow.itsm.configuration_item:
+        state: absent
+        name: "{{ ec2_instance_name }}"
+        sys_class_name: cmdb_ci_server
+        instance: 
+          host: "https://{{ sn_instance }}.service-now.com"
+          username: "{{ sn_username }}"
+          password: "{{ sn_password }}"
+
+    - name: Update a catalog work notes and state in ServiceNow
+      servicenow.servicenow.snow_record:
+        state: present
+        number: "{{ snow_ticket_num }}"
+        table: sc_request
+        instance: "{{ sn_instance }}"
+        username: "{{ sn_username }}"
+        password: "{{ sn_password }}"
+        data:
+          request_state: "Closed Complete"
+          work_notes: "EC2 instance {{ ec2_instance_name }} has been removed from AWS and the CMDB"
+      when: snow_ticket_num != ''
