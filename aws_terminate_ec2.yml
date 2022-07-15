@@ -21,6 +21,7 @@
         state: absent
         filters: 
           "tag:Name": "{{ ec2_instance_name }}"
+        region: us-east-1
       register: ec2_output
 
     - name: Return results
