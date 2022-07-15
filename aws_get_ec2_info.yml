@@ -1,0 +1,20 @@
+---
+- name: A simple playbook to create an EC2 instance on AWS
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks: 
+
+     - name: Get Ec2 Instance Info
+       amazon.aws.ec2_instance_info:
+         aws_access_key: AKIAVZ7U76S2VGW7254S
+         aws_secret_key: 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
+         region: us-east-1
+         filters:
+          "tag:Name": "smoky"
+       register: ec2_node_info
+
+     - name: DUmp it out
+       debug: 
+         var: ec2_node_info.instances[0].network_interfaces[0].association.public_dns_name

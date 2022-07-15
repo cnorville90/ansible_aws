@@ -39,26 +39,44 @@
       debug: 
         var: ec2_output
 
-    - name: Update a catalog work notes and state in ServiceNow
-      servicenow.servicenow.snow_record:
+    - name: Put the new EC2 instance in the CMDB
+      servicenow.itsm.configuration_item:
         state: present
-        number: "{{ snow_ticket_num }}"
-        table: sc_request
-        instance: "{{ sn_instance }}"
-        username: "{{ sn_username }}"
-        password: "{{ sn_password }}"
-        data:
-          request_state: "Closed Complete"
-          work_notes: "{{ ec2_output }}"
-      when: snow_ticket_num != ''
+        name: "{{ ec2_output.instances[0].public_dns_name }}"
+        ip_address: "{{ ec2_output.instances[0].public_ip_address }}"
+        environment: production
+        sys_class_name: cmdb_ci_server
+        other:
+          classification: Production
+          fqdn: "{{ ec2_output.instances[0].public_dns_name }}"
+          os: "Linux Red Hat"
+          host_name: "{{ ec2_instance_name }}"
+        instance: 
+          host: "{{ sn_instance }}"
+          username: "{{ sn_username }}"
+          password: "{{ sn_password }}"
 
-    - name: Gather the ec2 info
-      ec2_instance_info:
-        filters:
-          "tag:Name": "{{ ec2_instance_name }}"
-      register: ec2_node_info
+    # - name: Update a catalog work notes and state in ServiceNow
+    #   servicenow.servicenow.snow_record:
+    #     state: present
+    #     number: "{{ snow_ticket_num }}"
+    #     table: sc_request
+    #     instance: "{{ sn_instance }}"
+    #     username: "{{ sn_username }}"
+    #     password: "{{ sn_password }}"
+    #     data:
+    #       request_state: "Closed Complete"
+    #       work_notes: "{{ ec2_output }}"
+    #   when: snow_ticket_num != ''
 
-    - name: DUmp it out
-      debug: 
-        var: ec2_node_info
+    # - name: Gather the ec2 info
+    #   ec2_instance_info:
+    #     filters:
+    #       "tag:Name": "{{ ec2_instance_name }}"
+    #   register: ec2_node_info
+
+    # - name: DUmp it out
+    #   debug: 
+    #     var: ec2_node_info
+
 

@@ -1,0 +1,7 @@
+---
+  playbook-artifact:
+    enable: false
+
+  execution-environment: 
+    image: localhost/ee-aws:v1.2
+    pull-policy: missing
