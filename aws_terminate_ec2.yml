@@ -18,7 +18,7 @@
 
     - name: Show sysid
       debug:
-        msg: "{{ snow_ticket_num }}"
+        msg: "{{ sys_id }}"
 
     - name: Remove an existing AWS ec2 instance
       amazon.aws.ec2_instance:
@@ -32,17 +32,9 @@
       debug: 
         var: ec2_output
 
-    - name: Retrieve all hardare configuration items
-      servicenow.itsm.configuration_item_info:
-        sys_class_name: cmdb_ci_server
-        query:
-          - category: = Hardware
-      register: the_server
-
     - name: Remove the EC2 instance from the CMDB
       servicenow.itsm.configuration_item:
         state: absent
-        name: "{{ ec2_instance_name }}"
         sys_class_name: cmdb_ci_server
         sys_id: "{{ sys_id }}"
         instance: 
