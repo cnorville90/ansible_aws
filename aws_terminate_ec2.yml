@@ -16,7 +16,7 @@
       debug:
         msg: "{{ snow_ticket_num }}"
 
-    - name: Create a basic AWS ec2 instance
+    - name: Remove an existing AWS ec2 instance
       amazon.aws.ec2_instance:
         state: absent
         filters: 
@@ -28,11 +28,12 @@
       debug: 
         var: ec2_output
 
-    - name: Put the new EC2 instance in the CMDB
+    - name: Remove the EC2 instance from the CMDB
       servicenow.itsm.configuration_item:
         state: absent
         name: "{{ ec2_instance_name }}"
         sys_class_name: cmdb_ci_server
+        sys_id: c974fb0087f4d9109364ffb7cebb35cc
         instance: 
           host: "https://{{ sn_instance }}.service-now.com"
           username: "{{ sn_username }}"
