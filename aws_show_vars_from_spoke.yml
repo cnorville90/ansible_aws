@@ -1,0 +1,19 @@
+---
+- name: A simple playbook to Display Variables passed in from ServiceNow Spoke
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Show Instance Type
+      debug:
+        msg: "{{ ec2_instance_type }}"
+
+    - name: Show Instance name
+      debug:
+        msg: "{{ ec2_instance_name }}"
+
+    - name: Show SNOW Record
+      debug:
+        msg: "{{ snow_ticket_num }}"
