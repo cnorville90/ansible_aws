@@ -3,8 +3,8 @@
   hosts: localhost
   gather_facts: no
   connection: local
-  vars_files:
-    - snow_vars.yml
+  #vars_files:
+  #  - snow_vars.yml
 
   tasks:
 
