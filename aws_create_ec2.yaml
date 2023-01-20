@@ -1,6 +1,7 @@
 ---
 - name: A simple playbook to create an EC2 instance on AWS
   hosts: localhost
+  gather_facts: no
 
   tasks:
 
@@ -10,7 +11,7 @@
         instance_type: "{{ ec2_instance_type }}"
         image_id: "{{ ec2_image_id }}"
         wait: true
-        group: "{{ ec2_sg }}"
+        security_group: "{{ ec2_sg }}"
         count: "{{ ec2_instance_count }}"
         vpc_subnet_id: "{{ ec2_subnet_id }}"
         region: "{{ ec2_region }}"

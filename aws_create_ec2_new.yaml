@@ -39,32 +39,32 @@
       debug: 
         var: ec2_output
 
-    - name: Put the new EC2 instance in the CMDB
-      servicenow.itsm.configuration_item:
-        state: present
-        name: "{{ ec2_instance_name }}"
-        #ip_address: "{{ ec2_output.instances[0].public_ip_address }}"
-        environment: production
-        sys_class_name: cmdb_ci_server
-        other:
-          classification: Production
-          fqdn: "{{ ec2_output.instances[0].public_dns_name }}"
-          os: "Linux Red Hat"
-          host_name: "{{ ec2_instance_name }}"
-        instance: 
-          host: "https://{{ sn_instance }}.service-now.com"
-          username: "{{ sn_username }}"
-          password: "{{ sn_password }}"
+    # - name: Put the new EC2 instance in the CMDB
+    #   servicenow.itsm.configuration_item:
+    #     state: present
+    #     name: "{{ ec2_instance_name }}"
+    #     #ip_address: "{{ ec2_output.instances[0].public_ip_address }}"
+    #     environment: production
+    #     sys_class_name: cmdb_ci_server
+    #     other:
+    #       classification: Production
+    #       fqdn: "{{ ec2_output.instances[0].public_dns_name }}"
+    #       os: "Linux Red Hat"
+    #       host_name: "{{ ec2_instance_name }}"
+    #     instance: 
+    #       host: "https://{{ sn_instance }}.service-now.com"
+    #       username: "{{ sn_username }}"
+    #       password: "{{ sn_password }}"
 
-    - name: Update a catalog work notes and state in ServiceNow
-      servicenow.servicenow.snow_record:
-        state: present
-        number: "{{ snow_ticket_num }}"
-        table: sc_request
-        instance: "{{ sn_instance }}"
-        username: "{{ sn_username }}"
-        password: "{{ sn_password }}"
-        data:
-          request_state: "Closed Complete"
-          work_notes: "{{ ec2_output }}"
-      when: snow_ticket_num != ''
+    # - name: Update a catalog work notes and state in ServiceNow
+    #   servicenow.servicenow.snow_record:
+    #     state: present
+    #     number: "{{ snow_ticket_num }}"
+    #     table: sc_request
+    #     instance: "{{ sn_instance }}"
+    #     username: "{{ sn_username }}"
+    #     password: "{{ sn_password }}"
+    #     data:
+    #       request_state: "Closed Complete"
+    #       work_notes: "{{ ec2_output }}"
+    #   when: snow_ticket_num != ''
