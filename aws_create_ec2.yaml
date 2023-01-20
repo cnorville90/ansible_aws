@@ -13,5 +13,4 @@
         group: "{{ ec2_sg }}"
         count: "{{ ec2_instance_count }}"
         vpc_subnet_id: "{{ ec2_subnet_id }}"
-        assign_public_ip: "{{ assign_public_ip }}"
         region: "{{ ec2_region }}"
