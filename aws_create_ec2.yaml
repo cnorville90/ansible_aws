@@ -8,7 +8,7 @@
       amazon.aws.ec2_instance:
         key_name: "{{ ec2_key_pair }}"
         instance_type: "{{ ec2_instance_type }}"
-        image: "{{ ec2_image_id }}"
+        image_id: "{{ ec2_image_id }}"
         wait: true
         group: "{{ ec2_sg }}"
         count: "{{ ec2_instance_count }}"
