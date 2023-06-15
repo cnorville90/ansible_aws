@@ -15,3 +15,4 @@
         count: "{{ ec2_instance_count }}"
         vpc_subnet_id: "{{ ec2_subnet_id }}"
         region: "{{ ec2_region }}"
+        name: "{{ ec2_instance_name }}"
